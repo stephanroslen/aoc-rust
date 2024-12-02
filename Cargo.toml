@@ -1,0 +1,7 @@
+[workspace.dependencies]
+thiserror = "^2.0"
+util = {path = "util"}
+
+[workspace]
+members = ["util", "year2024/day01", "year2024/day02"]
+resolver = "2"
