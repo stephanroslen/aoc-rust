@@ -8,4 +8,6 @@ pub enum Errors {
     DimError(String),
     #[error("UncategorizedError({0})")]
     UncategorizedError(String),
+    #[error("ConversionError")]
+    ConversionError,
 }
