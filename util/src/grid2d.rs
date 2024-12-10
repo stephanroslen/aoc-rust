@@ -1,3 +1,4 @@
+use crate::coord2d::ICoord2D;
 pub use crate::coord2d::UCoord2D;
 pub use crate::error::Errors;
 
@@ -80,5 +81,14 @@ impl<T: Clone> UGrid2D<T> {
 
     pub fn dim(&self) -> UCoord2D {
         self.dim
+    }
+
+    pub fn icoord_to_grid(&self, coord: ICoord2D) -> Option<UCoord2D> {
+        let candidate : Option<UCoord2D> = coord.try_into().ok();
+        match candidate {
+            Some(UCoord2D{x, y: _}) if x >= self.dim.x => None,
+            Some(UCoord2D{x: _, y}) if y >= self.dim.y => None,
+            val => val,
+        }
     }
 }

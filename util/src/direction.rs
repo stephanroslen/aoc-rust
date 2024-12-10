@@ -27,4 +27,8 @@ impl Direction {
             West => North,
         }
     }
+
+    pub fn directions() -> [Direction; 4] {
+        [North, East, South, West]
+    }
 }
