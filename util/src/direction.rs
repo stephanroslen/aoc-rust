@@ -1,7 +1,7 @@
 use crate::coord2d::ICoord2D;
 use crate::direction::Direction::{East, North, South, West};
 
-#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq, Hash, Ord, PartialOrd)]
 pub enum Direction {
     North,
     East,

@@ -2,13 +2,13 @@ use crate::error::Errors;
 use std::ops::Sub;
 use std::ops::{Add, SubAssign};
 
-#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
 pub struct UCoord2D {
     pub x: usize,
     pub y: usize,
 }
 
-#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq)]
+#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ICoord2D {
     pub x: isize,
     pub y: isize,
