@@ -1,14 +1,13 @@
 use crate::error::Errors;
-use std::ops::Sub;
-use std::ops::{Add, SubAssign};
+use std::ops::{Add, Mul, Sub, SubAssign};
 
-#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord, Default)]
 pub struct UCoord2D {
     pub x: usize,
     pub y: usize,
 }
 
-#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Copy, Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord, Default)]
 pub struct ICoord2D {
     pub x: isize,
     pub y: isize,
@@ -50,6 +49,16 @@ impl Add<ICoord2D> for ICoord2D {
         Self::Output {
             x: self.x + rhs.x,
             y: self.y + rhs.y,
+        }
+    }
+}
+
+impl Mul<isize> for ICoord2D {
+    type Output = ICoord2D;
+    fn mul(self, rhs: isize) -> Self::Output {
+        Self::Output {
+            x: self.x * rhs,
+            y: self.y * rhs,
         }
     }
 }
