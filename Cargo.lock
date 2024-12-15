@@ -202,3 +202,10 @@ dependencies = [
  "regex",
  "util",
 ]
+
+[[package]]
+name = "year2024day15"
+version = "0.1.0"
+dependencies = [
+ "util",
+]
