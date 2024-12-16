@@ -19,6 +19,15 @@ impl Direction {
         }
     }
 
+    pub fn rotate_left(self) -> Direction {
+        match self {
+            North => West,
+            East => North,
+            South => East,
+            West => South,
+        }
+    }
+
     pub fn rotate_right(self) -> Direction {
         match self {
             North => East,

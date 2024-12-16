@@ -80,14 +80,14 @@ impl SubAssign<ICoord2D> for ICoord2D {
     }
 }
 
-impl TryInto<UCoord2D> for ICoord2D {
+impl TryFrom<ICoord2D> for UCoord2D {
     type Error = crate::error::Errors;
 
-    fn try_into(self) -> Result<UCoord2D, Self::Error> {
-        match self {
+    fn try_from(val: ICoord2D) -> Result<Self, Self::Error> {
+        match val {
             ICoord2D { x, y: _ } if x < 0 => Err(Errors::ConversionError),
             ICoord2D { x: _, y } if y < 0 => Err(Errors::ConversionError),
-            ICoord2D { x, y } => Ok(UCoord2D {
+            ICoord2D { x, y } => Ok(Self {
                 x: x as usize,
                 y: y as usize,
             }),
@@ -95,17 +95,49 @@ impl TryInto<UCoord2D> for ICoord2D {
     }
 }
 
-impl TryInto<ICoord2D> for UCoord2D {
+impl TryFrom<UCoord2D> for ICoord2D {
     type Error = crate::error::Errors;
 
-    fn try_into(self) -> Result<ICoord2D, Self::Error> {
-        match self {
+    fn try_from(val: UCoord2D) -> Result<Self, Self::Error> {
+        match val {
             UCoord2D { x, y: _ } if x > isize::MAX as usize => Err(Errors::ConversionError),
             UCoord2D { x: _, y } if y > isize::MAX as usize => Err(Errors::ConversionError),
-            UCoord2D { x, y } => Ok(ICoord2D {
+            UCoord2D { x, y } => Ok(Self {
                 x: x as isize,
                 y: y as isize,
             }),
         }
+    }
+}
+
+pub trait TryAsUCoord2D {
+    fn try_as_uucord2d(self) -> Result<UCoord2D, Errors>;
+}
+
+impl TryAsUCoord2D for UCoord2D {
+    fn try_as_uucord2d(self) -> Result<UCoord2D, Errors> {
+        Ok(self)
+    }
+}
+
+impl TryAsUCoord2D for ICoord2D {
+    fn try_as_uucord2d(self) -> Result<UCoord2D, Errors> {
+        self.try_into()
+    }
+}
+
+pub trait TryAsICoord2D {
+    fn try_as_iucord2d(self) -> Result<ICoord2D, Errors>;
+}
+
+impl TryAsICoord2D for ICoord2D {
+    fn try_as_iucord2d(self) -> Result<ICoord2D, Errors> {
+        Ok(self)
+    }
+}
+
+impl TryAsICoord2D for UCoord2D {
+    fn try_as_iucord2d(self) -> Result<ICoord2D, Errors> {
+        self.try_into()
     }
 }

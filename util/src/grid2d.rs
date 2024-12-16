@@ -1,4 +1,5 @@
 use crate::coord2d::ICoord2D;
+pub use crate::coord2d::TryAsUCoord2D;
 pub use crate::coord2d::UCoord2D;
 pub use crate::error::Errors;
 
@@ -15,8 +16,9 @@ impl<T: Default + Clone> UGrid2D<T> {
 }
 
 impl<T: Clone> UGrid2D<T> {
-    fn internal_index(&self, dim: UCoord2D) -> Result<usize, Errors> {
-        match dim {
+    fn internal_index(&self, coord: impl TryAsUCoord2D) -> Result<usize, Errors> {
+        let coord = coord.try_as_uucord2d()?;
+        match coord {
             UCoord2D { x, y: _ } if x >= self.dim.x => Err(Errors::DimError(format!(
                 "x ({}) equal or above dimensional bound ({})",
                 x, self.dim.x
@@ -28,14 +30,14 @@ impl<T: Clone> UGrid2D<T> {
             UCoord2D { x, y } => Ok(x + self.dim.x * y),
         }
     }
-    pub fn get(&self, coord: UCoord2D) -> Result<&T, Errors> {
+    pub fn get(&self, coord: impl TryAsUCoord2D) -> Result<&T, Errors> {
         let idx = self.internal_index(coord)?;
         self.data
             .get(idx)
             .ok_or(Errors::DimError("Unexpected dim error".into()))
     }
 
-    pub fn get_mut(&mut self, coord: UCoord2D) -> Result<&mut T, Errors> {
+    pub fn get_mut(&mut self, coord: impl TryAsUCoord2D) -> Result<&mut T, Errors> {
         let idx = self.internal_index(coord)?;
         self.data
             .get_mut(idx)
@@ -84,10 +86,10 @@ impl<T: Clone> UGrid2D<T> {
     }
 
     pub fn icoord_to_grid(&self, coord: ICoord2D) -> Option<UCoord2D> {
-        let candidate : Option<UCoord2D> = coord.try_into().ok();
+        let candidate: Option<UCoord2D> = coord.try_into().ok();
         match candidate {
-            Some(UCoord2D{x, y: _}) if x >= self.dim.x => None,
-            Some(UCoord2D{x: _, y}) if y >= self.dim.y => None,
+            Some(UCoord2D { x, y: _ }) if x >= self.dim.x => None,
+            Some(UCoord2D { x: _, y }) if y >= self.dim.y => None,
             val => val,
         }
     }
