@@ -37,7 +37,7 @@ impl Direction {
         }
     }
 
-    pub fn directions() -> [Direction; 4] {
+    pub const fn directions() -> [Direction; 4] {
         [North, East, South, West]
     }
 }
