@@ -10,6 +10,7 @@ pub enum Direction {
 }
 
 impl Direction {
+    #[inline(always)]
     pub fn to_offset(self) -> ICoord2D {
         match self {
             North => ICoord2D { x: 0, y: -1 },
@@ -19,6 +20,7 @@ impl Direction {
         }
     }
 
+    #[inline(always)]
     pub fn rotate_left(self) -> Direction {
         match self {
             North => West,
@@ -28,6 +30,7 @@ impl Direction {
         }
     }
 
+    #[inline(always)]
     pub fn rotate_right(self) -> Direction {
         match self {
             North => East,
@@ -37,6 +40,7 @@ impl Direction {
         }
     }
 
+    #[inline(always)]
     pub const fn directions() -> [Direction; 4] {
         [North, East, South, West]
     }

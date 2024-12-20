@@ -10,12 +10,14 @@ pub struct UGrid2D<T> {
 }
 
 impl<T: Default + Clone> UGrid2D<T> {
+    #[inline(always)]
     pub fn from_default(dim: UCoord2D) -> Self {
         Self::generate(dim, |_| Ok(T::default())).unwrap()
     }
 }
 
 impl<T: Clone> UGrid2D<T> {
+    #[inline(always)]
     fn internal_index(&self, coord: impl TryAsUCoord2D) -> Result<usize, Errors> {
         let coord = coord.try_as_uucord2d()?;
         match coord {
@@ -30,6 +32,8 @@ impl<T: Clone> UGrid2D<T> {
             UCoord2D { x, y } => Ok(x + self.dim.x * y),
         }
     }
+
+    #[inline(always)]
     pub fn get(&self, coord: impl TryAsUCoord2D) -> Result<&T, Errors> {
         let idx = self.internal_index(coord)?;
         self.data
@@ -37,6 +41,7 @@ impl<T: Clone> UGrid2D<T> {
             .ok_or(Errors::DimError("Unexpected dim error".into()))
     }
 
+    #[inline(always)]
     pub fn get_mut(&mut self, coord: impl TryAsUCoord2D) -> Result<&mut T, Errors> {
         let idx = self.internal_index(coord)?;
         self.data
@@ -44,6 +49,7 @@ impl<T: Clone> UGrid2D<T> {
             .ok_or(Errors::DimError("Unexpected dim error".into()))
     }
 
+    #[inline(always)]
     pub fn generate<F: FnMut(UCoord2D) -> Result<T, Errors>>(
         dim: UCoord2D,
         mut f: F,
@@ -58,6 +64,7 @@ impl<T: Clone> UGrid2D<T> {
         Ok(Self { dim, data })
     }
 
+    #[inline(always)]
     pub fn rotate_left(&self) -> Self {
         Self::generate(
             UCoord2D {
@@ -75,16 +82,19 @@ impl<T: Clone> UGrid2D<T> {
         .unwrap()
     }
 
+    #[inline(always)]
     pub fn sub_grid(&self, start: UCoord2D, dim: UCoord2D) -> Result<Self, Errors> {
         Ok(Self::generate(dim, |new_coord| {
             Ok(self.get(start + new_coord)?.clone())
         })?)
     }
 
+    #[inline(always)]
     pub fn dim(&self) -> UCoord2D {
         self.dim
     }
 
+    #[inline(always)]
     pub fn icoord_to_grid(&self, coord: ICoord2D) -> Option<UCoord2D> {
         let candidate: Option<UCoord2D> = coord.try_into().ok();
         match candidate {
