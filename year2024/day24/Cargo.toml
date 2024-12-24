@@ -1,0 +1,8 @@
+[package]
+name = "year2024day24"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rustc-hash = { workspace = true }
+util = { workspace = true }
