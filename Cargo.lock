@@ -273,3 +273,7 @@ dependencies = [
  "rustc-hash",
  "util",
 ]
+
+[[package]]
+name = "year2024day25"
+version = "0.1.0"
