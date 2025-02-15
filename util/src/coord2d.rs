@@ -1,5 +1,5 @@
 use crate::error::Errors;
-use std::ops::{Add, Mul, Sub, SubAssign};
+use std::ops::{Add, AddAssign, Mul, Sub, SubAssign};
 
 #[derive(Copy, Clone, Debug, Hash, PartialEq, Eq, PartialOrd, Ord, Default)]
 pub struct UCoord2D {
@@ -58,6 +58,14 @@ impl Add<ICoord2D> for ICoord2D {
             x: self.x + rhs.x,
             y: self.y + rhs.y,
         }
+    }
+}
+
+impl AddAssign<ICoord2D> for ICoord2D {
+    #[inline(always)]
+    fn add_assign(&mut self, rhs: ICoord2D) {
+        self.x += rhs.x;
+        self.y += rhs.y;
     }
 }
 
