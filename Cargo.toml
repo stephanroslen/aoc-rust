@@ -1,11 +1,12 @@
 [workspace.dependencies]
+chksum-md5 = "^0.1.0"
 rustc-hash = "^2.0.0"
 regex = "^1.11"
 thiserror = "^2.0"
 util = { path = "util" }
 
 [workspace]
-members = ["util", "year2015/day01", "year2015/day02", "year2015/day03", "year2024/day01", "year2024/day02", "year2024/day03", "year2024/day04", "year2024/day05", "year2024/day06", "year2024/day07", "year2024/day08", "year2024/day09", "year2024/day10", "year2024/day11", "year2024/day12", "year2024/day13", "year2024/day14", "year2024/day15", "year2024/day16", "year2024/day17", "year2024/day18", "year2024/day19", "year2024/day20", "year2024/day21", "year2024/day22", "year2024/day23", "year2024/day24", "year2024/day25"]
+members = ["util", "year2015/day01", "year2015/day02", "year2015/day03", "year2015/day04", "year2024/day01", "year2024/day02", "year2024/day03", "year2024/day04", "year2024/day05", "year2024/day06", "year2024/day07", "year2024/day08", "year2024/day09", "year2024/day10", "year2024/day11", "year2024/day12", "year2024/day13", "year2024/day14", "year2024/day15", "year2024/day16", "year2024/day17", "year2024/day18", "year2024/day19", "year2024/day20", "year2024/day21", "year2024/day22", "year2024/day23", "year2024/day24", "year2024/day25"]
 resolver = "2"
 
 [profile.release]
