@@ -115,6 +115,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "year2015day01"
+version = "0.1.0"
+dependencies = [
+ "util",
+]
+
+[[package]]
 name = "year2024day01"
 version = "0.1.0"
 dependencies = [
