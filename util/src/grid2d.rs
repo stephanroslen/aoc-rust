@@ -84,9 +84,9 @@ impl<T: Clone> UGrid2D<T> {
 
     #[inline(always)]
     pub fn sub_grid(&self, start: UCoord2D, dim: UCoord2D) -> Result<Self, Errors> {
-        Ok(Self::generate(dim, |new_coord| {
+        Self::generate(dim, |new_coord| {
             Ok(self.get(start + new_coord)?.clone())
-        })?)
+        })
     }
 
     #[inline(always)]

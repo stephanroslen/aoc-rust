@@ -25,7 +25,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 .map(|num| -> Result<usize, ParseIntError> { num.parse::<usize>() })
                 .collect::<Result<Vec<_>, _>>()?;
             Ok(UCoord2D {
-                x: *coord_vals.get(0).ok_or(Errors::ParseError)?,
+                x: *coord_vals.first().ok_or(Errors::ParseError)?,
                 y: *coord_vals.get(1).ok_or(Errors::ParseError)?,
             })
         })

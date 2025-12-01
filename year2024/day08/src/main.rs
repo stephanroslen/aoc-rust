@@ -34,7 +34,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut antinodes1: HashSet<ICoord2D> = HashSet::new();
 
-    for (_, locs) in &map {
+    for locs in map.values() {
         for loc0 in locs {
             for loc1 in locs {
                 if loc0 == loc1 {
@@ -57,7 +57,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut antinodes2: HashSet<ICoord2D> = HashSet::new();
 
-    for (_, locs) in &map {
+    for locs in map.values() {
         for loc0 in locs {
             for loc1 in locs {
                 if loc0 == loc1 {

@@ -40,10 +40,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             let mut accum = HashSet::new();
 
             let (start_coord, start_char) = shrink_data
-                .iter()
-                .nth(0)
+                .iter().next()
                 .map(|(coord, char)| (*coord, *char))
-                .expect("Map expected to have first value".into());
+                .expect("Map expected to have first value");
 
             shrink_data.remove(&start_coord);
             accum.insert(start_coord);

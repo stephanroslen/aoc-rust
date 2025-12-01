@@ -17,7 +17,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let part2 = seq
         .iter()
         .scan(0, |state, &v| {
-            *state = *state + v;
+            *state += v;
             Some(*state)
         })
         .enumerate()

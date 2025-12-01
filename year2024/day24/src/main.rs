@@ -121,8 +121,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
             if name
                 .as_ref()
-                .chars()
-                .nth(0)
+                .chars().next()
                 .expect("First character expected")
                 == 'z'
             {
@@ -154,7 +153,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let result2 = {
         let max_index =
-            *&targets.last().expect("Last target expected").as_ref()[1..3].parse::<usize>()?;
+            targets.last().expect("Last target expected").as_ref()[1..3].parse::<usize>()?;
 
         let mut swaps = Vec::with_capacity(8);
 

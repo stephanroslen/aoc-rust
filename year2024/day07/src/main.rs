@@ -20,7 +20,7 @@ impl Line {
         for i in 0..max {
             let mut ops = Vec::new();
             for io in 0..op_cnt {
-                let op = match i >> io & 1 {
+                let op = match (i >> io) & 1 {
                     1 => Op::Mul,
                     _ => Op::Add,
                 };

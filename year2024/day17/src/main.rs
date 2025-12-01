@@ -40,8 +40,8 @@ enum ComboOperand {
 impl From<Value> for ComboOperand {
     fn from(value: Value) -> Self {
         match value {
-            0 | 1 | 2 | 3 => ComboOperand::Literal(value),
-            4 | 5 | 6 => ComboOperand::Register(value - 4),
+            0..=3 => ComboOperand::Literal(value),
+            4..=6 => ComboOperand::Register(value - 4),
             _ => panic!("Invalid operand number"),
         }
     }
@@ -107,7 +107,7 @@ impl Machine {
                         .pow(self.calculate_combo_operand_value(raw_operand_value) as u32);
             }
             Instruction::Bxl => {
-                self.registers[1] = self.registers[1] ^ raw_operand_value;
+                self.registers[1] ^= raw_operand_value;
             }
             Instruction::Bst => {
                 self.registers[1] = self.calculate_combo_operand_value(raw_operand_value) & 0x7;
@@ -118,7 +118,7 @@ impl Machine {
                 }
             }
             Instruction::Bxc => {
-                self.registers[1] = self.registers[1] ^ self.registers[2];
+                self.registers[1] ^= self.registers[2];
             }
             Instruction::Out => {
                 output = Some(self.calculate_combo_operand_value(raw_operand_value) & 0x7);

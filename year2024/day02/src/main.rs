@@ -17,7 +17,7 @@ impl Line {
                     let max = std::cmp::max(a, b);
                     let diff = max - min;
                     (
-                        prev_ok && diff >= 1 && diff <= 3 && prev_dir.unwrap_or(dir) == dir,
+                        prev_ok && (1..=3).contains(&diff) && prev_dir.unwrap_or(dir) == dir,
                         Some(dir),
                     )
                 },
