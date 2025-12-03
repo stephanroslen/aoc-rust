@@ -383,3 +383,10 @@ version = "0.1.0"
 dependencies = [
  "util",
 ]
+
+[[package]]
+name = "year2025day03"
+version = "0.1.0"
+dependencies = [
+ "util",
+]
