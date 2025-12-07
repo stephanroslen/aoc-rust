@@ -53,7 +53,7 @@ impl World {
 
         if *self.map.get(
             self.map
-                .icoord_to_grid(check)
+                .coord_to_grid(check)
                 .ok_or(Errors::DimError("Coord outside map".into()))?,
         )? == MapElem::Wall
         {
@@ -74,7 +74,7 @@ impl World {
 
         if *self.map.get(
             self.map
-                .icoord_to_grid(self.robot_position + move_offset)
+                .coord_to_grid(self.robot_position + move_offset)
                 .ok_or(Errors::DimError("Invalid coordinate for map".into()))?,
         )? == MapElem::Wall
         {
@@ -120,7 +120,7 @@ impl World {
                 for &o in &box_check_wall_offsets {
                     if *self.map.get(
                         self.map
-                            .icoord_to_grid(box_check_coord + o)
+                            .coord_to_grid(box_check_coord + o)
                             .ok_or(Errors::DimError("Invalid coordinate for map".into()))?,
                     )? == MapElem::Wall
                     {

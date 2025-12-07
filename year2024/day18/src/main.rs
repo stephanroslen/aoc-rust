@@ -147,7 +147,7 @@ fn calculate_cost(grid: UGrid2D<Field>) -> Result<usize, Errors> {
             for dir in Direction::directions() {
                 let offset = dir.to_offset();
                 let candidate = coord + offset;
-                if let Some(candidate) = grid.icoord_to_grid(candidate) {
+                if let Some(candidate) = grid.coord_to_grid(candidate) {
                     visit_queue.push(PathSearchCandidate {
                         coord: candidate,
                         cost: cost + 1,

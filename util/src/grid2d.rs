@@ -1,4 +1,3 @@
-use crate::coord2d::ICoord2D;
 pub use crate::coord2d::TryAsUCoord2D;
 pub use crate::coord2d::UCoord2D;
 pub use crate::error::Errors;
@@ -84,9 +83,7 @@ impl<T: Clone> UGrid2D<T> {
 
     #[inline(always)]
     pub fn sub_grid(&self, start: UCoord2D, dim: UCoord2D) -> Result<Self, Errors> {
-        Self::generate(dim, |new_coord| {
-            Ok(self.get(start + new_coord)?.clone())
-        })
+        Self::generate(dim, |new_coord| Ok(self.get(start + new_coord)?.clone()))
     }
 
     #[inline(always)]
@@ -95,7 +92,7 @@ impl<T: Clone> UGrid2D<T> {
     }
 
     #[inline(always)]
-    pub fn icoord_to_grid(&self, coord: ICoord2D) -> Option<UCoord2D> {
+    pub fn coord_to_grid(&self, coord: impl TryInto<UCoord2D>) -> Option<UCoord2D> {
         let candidate: Option<UCoord2D> = coord.try_into().ok();
         match candidate {
             Some(UCoord2D { x, y: _ }) if x >= self.dim.x => None,

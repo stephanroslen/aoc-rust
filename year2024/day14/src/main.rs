@@ -74,7 +74,7 @@ fn print_map(dim: ICoord2D, robot_positions: impl Iterator<Item = ICoord2D>) -> 
 
     for p in robot_positions {
         let pg = map
-            .icoord_to_grid(p)
+            .coord_to_grid(p)
             .ok_or(Errors::DimError("Coord outside grid".into()))?;
         *map.get_mut(pg)? += 1;
     }

@@ -49,7 +49,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 *field_cost = cost;
                 for dir in Direction::directions() {
                     let offset = dir.to_offset();
-                    if let Some(new_candidate) = grid.icoord_to_grid(candidate + offset) {
+                    if let Some(new_candidate) = grid.coord_to_grid(candidate + offset) {
                         let new_cost = cost + 1;
                         fringe.push_back((new_candidate, new_cost));
                     }
@@ -86,7 +86,7 @@ fn solution(dist_map: &UGrid2D<usize>, cheat_time: usize) -> Result<usize, Error
                         x: ix_offset,
                         y: iy_offset,
                     };
-                    if let Some(to_candidate) = dist_map.icoord_to_grid(from_candidate + offset) {
+                    if let Some(to_candidate) = dist_map.coord_to_grid(from_candidate + offset) {
                         let ix_offset_abs = ix_offset.abs();
                         let to_dist = *dist_map.get(to_candidate)?;
 

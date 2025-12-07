@@ -64,7 +64,7 @@ impl Field {
                     let offset = dir.to_offset();
                     let new_coord = coord + offset;
 
-                    if let Some(new_coord) = self.grid.icoord_to_grid(new_coord) {
+                    if let Some(new_coord) = self.grid.coord_to_grid(new_coord) {
                         let new_slot = self.grid.get(new_coord)?;
 
                         if let Slot::Paper = new_slot {
@@ -105,7 +105,7 @@ impl Field {
                         let offset = dir.to_offset();
                         let new_coord = coord + offset;
 
-                        if let Some(new_coord) = self.grid.icoord_to_grid(new_coord) {
+                        if let Some(new_coord) = self.grid.coord_to_grid(new_coord) {
                             let new_slot = self.grid.get(new_coord)?;
 
                             if let Slot::Paper = new_slot {

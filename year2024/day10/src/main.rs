@@ -20,7 +20,7 @@ fn score(loc: UCoord2D, grid: &UGrid2D<u32>) -> Result<(usize, usize), util::err
 
         for dir in Direction::directions() {
             let offset = dir.to_offset();
-            let gloc = grid.icoord_to_grid(candidate + offset);
+            let gloc = grid.coord_to_grid(candidate + offset);
             if let Some(gloc) = gloc {
                 if *grid.get(gloc)? == val + 1 {
                     check.push_back(gloc);

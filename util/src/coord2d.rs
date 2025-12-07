@@ -25,6 +25,14 @@ impl Add<UCoord2D> for UCoord2D {
     }
 }
 
+impl AddAssign<UCoord2D> for UCoord2D {
+    #[inline(always)]
+    fn add_assign(&mut self, rhs: UCoord2D) {
+        self.x += rhs.x;
+        self.y += rhs.y;
+    }
+}
+
 impl Sub<UCoord2D> for UCoord2D {
     type Output = UCoord2D;
 
