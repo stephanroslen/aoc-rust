@@ -1,0 +1,9 @@
+[package]
+name = "year2025day10"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+ahash = { workspace = true }
+util = { workspace = true }
+z3 = { workspace = true }
