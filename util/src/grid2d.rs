@@ -2,7 +2,7 @@ pub use crate::coord2d::TryAsUCoord2D;
 pub use crate::coord2d::UCoord2D;
 pub use crate::error::Errors;
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct UGrid2D<T> {
     dim: UCoord2D,
     data: Vec<T>,
@@ -78,6 +78,19 @@ impl<T: Clone> UGrid2D<T> {
                 Ok(self.get(old_coord)?.to_owned())
             },
         )
+        .unwrap()
+    }
+
+    #[inline(always)]
+    pub fn flip_horizontal_axis(&self) -> Self {
+        Self::generate(self.dim, |coord| {
+            Ok(self
+                .get(UCoord2D {
+                    x: coord.x,
+                    y: self.dim.y - coord.y - 1,
+                })?
+                .to_owned())
+        })
         .unwrap()
     }
 
