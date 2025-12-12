@@ -1,3 +1,4 @@
-/target
+**/target
+**/target_local
 **/input
 **/puzzle.md
